@@ -139,6 +139,10 @@ func (http *HTTP) setFromConfig(config config.Http) (err error) {
 		http.SplitCookie = *config.Split_cookie
 	}
 
+	if config.Reject_proxy != nil {
+		http.parserConfig.Reject_proxy = *config.Reject_proxy
+	}
+
 	if config.Real_ip_header != nil {
 		http.parserConfig.RealIPHeader = strings.ToLower(*config.Real_ip_header)
 	}

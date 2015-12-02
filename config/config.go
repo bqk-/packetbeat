@@ -74,6 +74,7 @@ type Http struct {
 	Include_body_for     []string
 	Hide_keywords        []string
 	Redact_authorization *bool
+	Reject_proxy	     *bool
 }
 
 type Memcache struct {

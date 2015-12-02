@@ -65,6 +65,7 @@ type parserConfig struct {
 	SendHeaders      bool
 	SendAllHeaders   bool
 	HeadersWhitelist map[string]bool
+	Reject_proxy     bool
 }
 
 func newParser(config *parserConfig) *parser {
@@ -287,6 +288,9 @@ func (parser *parser) parseHeader(m *message, data []byte) (bool, bool, int) {
 				m.connection = headerVal
 			}
 			if len(config.RealIPHeader) > 0 && headerName == config.RealIPHeader {
+				if config.Reject_proxy && len(headerVal) == 0 {
+					return false, false, p + 2
+				}
 				m.RealIP = headerVal
 			}
 
